@@ -9,3 +9,6 @@
 /training/models/__pycache__
 
 /training/models/AlexNet_best_model.pth
+/training/models/CompactCNN_best_model.pth
+/training/models/LeNet_best_model.pth
+/training/models/SkipConnectionCNN_best_model.pth
