@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <div class="result">
+            <p>Model: {{ model_name }}</p>
+            <p>Prediction: <strong>{{ prediction }}</strong></p>
+        </div>
+        <a href="/">Try another image</a>
+    </div>
+</body>
+</html>
+

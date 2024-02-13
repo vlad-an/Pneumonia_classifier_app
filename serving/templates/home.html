@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pneumonia Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Pneumonia Classifier</h1>
+        <form action="{{url_for('predict')}}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="imageUpload">Upload an image to classify:</label>
+                <input type="file" name="image" id="imageUpload" required>
+            </div>
+            <div class="form-group">
+                <label for="modelSelect">Select a model:</label>
+                <select name="model" id="modelSelect">
+                    <option value="lenet">LeNet</option>
+                    <option value="alexnet">AlexNet</option>
+                    <option value="compactnet">CompactNet</option>
+                    <option value="skipconnect">SkipConnect</option>
+                </select>
+            </div>
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+</body>
+</html>
+
