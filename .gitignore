@@ -1,9 +1,11 @@
-training/data
+/training/data
 
 /venv9
 
-training/mlruns
+/training/mlruns
 
 /mlruns
 
-training/models/__pycache__
+/training/models/__pycache__
+
+/training/models/AlexNet_best_model.pth
