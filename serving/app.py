@@ -62,10 +62,10 @@ models = {
 
 # Adjust model_paths to point to the correct location
 model_paths = {
-    'lenet': '../training/models/LeNet_best_model.pth',
-    'alexnet': '../training/models/AlexNet_best_model.pth',
-    'compactnet': '../training/models/CompactCNN_best_model.pth',
-    'skipconnect': '../training/models/SkipConnectionCNN_best_model.pth',
+    'lenet': '../training/models/checkpoints/LeNet_best_model.pth',
+    'alexnet': '../training/models/checkpoints/AlexNet_best_model.pth',
+    'compactnet': '../training/models/checkpoints/CompactCNN_best_model.pth',
+    'skipconnect': '../training/models/checkpoints/SkipConnectionCNN_best_model.pth',
 }
 
 # Load the state dicts

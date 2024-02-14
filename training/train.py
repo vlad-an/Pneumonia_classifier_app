@@ -100,7 +100,7 @@ def train_model(model_name, model, train_loader, valid_loader, criterion, optimi
         print(f"Best Validation Loss: {best_val_loss:.4f} at epoch {best_epoch+1}")
         
         # After training, save the best model
-        model_save_path = f'models/{model_name}_best_model.pth'
+        model_save_path = f'models/checkpoints/{model_name}_best_model.pth'
         torch.save(best_model_state, model_save_path)
         print(f"Best model saved to {model_save_path}")
 
