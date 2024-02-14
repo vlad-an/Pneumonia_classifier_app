@@ -6,7 +6,7 @@ import os
 from werkzeug.utils import secure_filename
 
 
-# Adjust the path to include your model definitions
+# Adjust the path to include your model definitionscd
 sys.path.append('../training')
 
 # Directly import the model classes
