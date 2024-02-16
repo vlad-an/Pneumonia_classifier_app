@@ -1,7 +1,9 @@
 import os
 import numpy as np
 from torchvision import datasets, transforms
-from torch.utils.data import DataLoader, Subset
+from torch.utils.data import DataLoader, Subset,ConcatDataset
+from sklearn.model_selection import train_test_split
+
 
 def load_data(data_dir, batch_size=32, validation_split=0.2):
     """
@@ -28,8 +30,28 @@ def load_data(data_dir, batch_size=32, validation_split=0.2):
     val_dataset = datasets.ImageFolder(os.path.join(data_dir, 'val'), transform=transform)
     test_dataset = datasets.ImageFolder(os.path.join(data_dir, 'test'), transform=transform)
     
+        # Combine the datasets
+    combined_dataset = ConcatDataset([train_dataset, val_dataset])
+    
+    # Extract targets for stratification from the combined dataset
+    # Note: ConcatDataset does not have a '.targets' attribute, so we need to combine targets manually
+    combined_targets = np.concatenate([np.array(train_dataset.targets), np.array(val_dataset.targets)])
+    
+    # Split indices into train and validation indices using stratification
+    train_indices, val_indices = train_test_split(
+        range(len(combined_dataset)),
+        test_size=validation_split,
+        stratify=combined_targets,
+        random_state=42  # for reproducibility
+    )
+    
+    # Create DataLoader for train and validation sets using Subset
+    train_loader = DataLoader(Subset(combined_dataset, train_indices), batch_size=batch_size, shuffle=True)
+    val_loader = DataLoader(Subset(combined_dataset, val_indices), batch_size=batch_size, shuffle=False)
+
+    """
     # Concatenate all datasets
-    all_dataset = train_dataset + val_dataset + test_dataset
+    all_dataset = train_dataset + val_dataset 
     
     # Shuffle the concatenated dataset
     np.random.seed(42)  # for reproducibility
@@ -42,5 +64,6 @@ def load_data(data_dir, batch_size=32, validation_split=0.2):
     # Create DataLoader for train and validation sets using Subset
     train_loader = DataLoader(Subset(all_dataset, train_indices), batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(Subset(all_dataset, val_indices), batch_size=batch_size, shuffle=False)
+    """
     
     return train_loader, val_loader
