@@ -3,6 +3,20 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class LeNet(nn.Module):
+    """
+    Implements the LeNet architecture for image classification.
+
+    The LeNet architecture is one of the earliest convolutional neural networks
+    that significantly impacted the field of deep learning, especially in image recognition tasks.
+    This implementation adjusts the original architecture to work with RGB images (3 input channels)
+    and allows for a variable number of output classes.
+
+    Args:
+        num_classes (int): Number of classes for the output layer. Defaults to 2.
+
+    The network consists of two convolutional layers followed by three fully connected layers.
+    Max pooling is applied after each convolutional layer to reduce the spatial dimensions of the feature maps.
+    """
     def __init__(self, num_classes=2):
         super(LeNet, self).__init__()
         self.conv1 = nn.Conv2d(3, 6, 5)  # Adjust input channels to 3

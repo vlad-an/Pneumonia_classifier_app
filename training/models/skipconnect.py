@@ -3,6 +3,22 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class SkipConnectionCNN(nn.Module):
+    """
+    Implements a convolutional neural network (CNN) with skip connections, enhancing the ability
+    to propagate gradients through deeper network layers and improving model accuracy by
+    facilitating feature reuse.
+
+    This architecture introduces skip connections that bypass one or more layers by performing
+    identity mapping and adding the output of the identity mapping to the output of layers being skipped.
+    It helps to mitigate the vanishing gradient problem in deep networks.
+
+    Args:
+        num_classes (int): Number of classes for the output layer, defaulting to 2.
+
+    The network includes several convolutional layers with batch normalization, an adaptive pooling layer
+    to ensure a fixed-size output regardless of the input size, and a fully connected layer for classification.
+    Skip connections are implemented to support effective training of deeper architectures.
+    """
     def __init__(self, num_classes=2):
         super(SkipConnectionCNN, self).__init__()
         self.conv1 = nn.Conv2d(3, 32, kernel_size=3, padding=1)

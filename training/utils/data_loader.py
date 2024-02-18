@@ -34,7 +34,6 @@ def load_data(data_dir, batch_size=32, validation_split=0.2):
     combined_dataset = ConcatDataset([train_dataset, val_dataset])
     
     # Extract targets for stratification from the combined dataset
-    # Note: ConcatDataset does not have a '.targets' attribute, so we need to combine targets manually
     combined_targets = np.concatenate([np.array(train_dataset.targets), np.array(val_dataset.targets)])
     
     # Split indices into train and validation indices using stratification
@@ -48,22 +47,5 @@ def load_data(data_dir, batch_size=32, validation_split=0.2):
     # Create DataLoader for train and validation sets using Subset
     train_loader = DataLoader(Subset(combined_dataset, train_indices), batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(Subset(combined_dataset, val_indices), batch_size=batch_size, shuffle=False)
-
-    """
-    # Concatenate all datasets
-    all_dataset = train_dataset + val_dataset 
-    
-    # Shuffle the concatenated dataset
-    np.random.seed(42)  # for reproducibility
-    indices = np.random.permutation(len(all_dataset))
-    
-    # Split indices into train and validation indices
-    split = int(np.floor(validation_split * len(all_dataset)))
-    train_indices, val_indices = indices[split:], indices[:split]
-    
-    # Create DataLoader for train and validation sets using Subset
-    train_loader = DataLoader(Subset(all_dataset, train_indices), batch_size=batch_size, shuffle=True)
-    val_loader = DataLoader(Subset(all_dataset, val_indices), batch_size=batch_size, shuffle=False)
-    """
     
     return train_loader, val_loader
